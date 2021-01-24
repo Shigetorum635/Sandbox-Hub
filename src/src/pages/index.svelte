@@ -30,15 +30,35 @@ db.collection("websites").get().then(function(querySnapshot) {
 });
 </script>
 
-<div class="container-fluid">
+<div class="container wrapper">
 {#each sites as site}
-
-<details class="collapse-panel w-400 mw-full"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
-  <summary class="collapse-header">
-{site.name}  </summary>
-  <div class="collapse-content">
-            {site.description}
+<!-- Card with no padding with a content container nested inside of it -->
+<div class="w-400 mw-full"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+  <div class="card p-0"> <!-- p-0 = padding: 0 -->
+    <img src="{site.image}" class="img-fluid rounded-top" alt="..."> <!-- rounded-top = rounded corners on the top -->
+    <!-- Nested content container inside card -->
+    <div class="content">
+      <h2 class="content-title">
+      {site.name}
+      </h2>
+      <p class="text-muted">
+      {site.description}
+      </p>
+      <div class="text-right"> <!-- text-right = text-align: right -->
+        <a href="{site.discord}" class="btn">Discord</a>
+        <a href="{site.url}" class="btn">Website</a>
+      </div>
+    </div>
   </div>
-</details>
+</div>
+
 {/each}
 </div>
+
+<style>
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+</style>
